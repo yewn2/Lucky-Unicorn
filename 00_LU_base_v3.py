@@ -1,5 +1,5 @@
 """
-LU base component v1
+LU base component v3
 Components added after they have been created and tested
 """
 import random
