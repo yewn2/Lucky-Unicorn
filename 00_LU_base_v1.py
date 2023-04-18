@@ -1,5 +1,5 @@
 """
-LU base component
+LU base component v1
 Components added after they have been created and tested
 """
 
