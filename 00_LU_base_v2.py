@@ -80,7 +80,6 @@ def num_check(question, low, high):
 
 # function to generate random token
 def generate_token(balance):
-    tokens = ["unicorn", "donkey", "horse", "zebra"]
     rounds_played = 0
     play_again = ""
 
@@ -90,52 +89,40 @@ def generate_token(balance):
         print(formatter(".", f"Round {rounds_played}"))
         percent = random.randint(1, 100)
 
-        # token type
+        # token type and adjust balance
         # if the percentage is lower than or equal to 5
         # user gets a unicorn
+        # add $4 to the balance
         if percent <= 5:
-            token = tokens[0]
-
-        # if the percentage is larger than 5 and lower than or equal to 35
-        # user gets a donkey
-        elif 5 < percent <= 35:
-            token = tokens[1]
-
-        # in all other cases the token must be a horse or zebra
-        # if the percentage is even, user gets a horse
-        elif percent % 2 == 0:
-            token = tokens[2]
-
-        # if the percentage is odd, user gets a zebra
-        else:
-            token = tokens[3]
-
-        # adjust balance
-        # if token is a unicorn, add $4 to balance
-        if token == "unicorn":
             balance += 4
             print()
             print(formatter("!", "Congratulations, you got a unicorn"))
             print()
 
-        # if token is a donkey, subtract $1 from balance
-        elif token == "donkey":
+        # if the percentage is larger than 5 and lower than or equal to 35
+        # user gets a donkey
+        # subtract $1 from the balance
+        elif 5 < percent <= 35:
             balance -= 1
             print()
             print(formatter("#", "Unfortunately, you got a donkey"))
             print()
+        # in all other cases the token must be a horse or zebra
+        # if the percentage is even, user gets a horse
+        # subtract $0.50 from the balance
+        elif percent % 2 == 0:
+            balance -= 0.50
+            print()
+            print(formatter("~", "You got a horse"))
+            print()
 
-        # otherwise (horse/zebra) subtract $0.50 from balance
+        # if the percentage is odd, user gets a zebra
+        # subtract $0.50 from the balance
         else:
             balance -= 0.50
-            if token == "horse":
-                print()
-                print(formatter("~", "You got a horse"))
-                print()
-            else:
-                print()
-                print(formatter("^", "You got a zebra"))
-                print()
+            print()
+            print(formatter("^", "You got a zebra"))
+            print()
 
         # Output
         print()
@@ -156,7 +143,7 @@ def generate_token(balance):
 # Main routine goes here:
 print(formatter("-", "Welcome to the Lucky Unicorn Game"))
 print()
-played_before = yes_no("Have you played this game before?")
+played_before = yes_no("Have you played this game before? ")
 
 if played_before == "No":
     instructions()
